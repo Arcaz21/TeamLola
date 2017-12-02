@@ -1,2 +1,0 @@
-# TeamLola
-Fuentes Suarez Belleza
