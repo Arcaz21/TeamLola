@@ -38,7 +38,7 @@ $data['id'] = isset ($_REQUEST['id'])?$_REQUEST['id']:NUll;
 			
 		}else echo "eroororor";
 		echo "<script>
-				window.location.href = \"../views/admin1.php\";
+				window.location.href = \"../views/admin1.php?view=yes\";
 			</script>	
 				";
 
