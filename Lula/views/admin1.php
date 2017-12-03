@@ -45,7 +45,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                 <div class="header-right">
                     <p style="font-size: 27px;">
                         <?php echo $data->fname ." ". $data->lname."  "?>
-                        <a href="index.html" class="btn btn-danger" title="Logout">
+                        <a href="index.php" class="btn btn-danger" title="Logout">
                             <i class="fa fa-sign-out "></i>
                         </a>
                     </p>
