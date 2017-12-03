@@ -66,7 +66,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             </a>
                         </li>
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'Students')" id="autoclick">
+                            <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'Students')" id="defaultOpen">
                                 <i class="fa fa-child"></i>Students  
                         
                             </a>
@@ -145,46 +145,42 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                     </tbody>
                                 </table>
                             </div>
-
-
                             <div id="Usersupdate" class="tabcontent">
                                 <?php $data = $db -> getUser($idd); ?>
                                 <h3>Studeddd</h3>
                                 <form action="../controllers/usersFunction.php" method="POST">
-        <div class="group"><input type="hidden" id="id" name="id" value="<?php echo $data->id ?>" required>
-        <div class="group"></div>
-            <label  class="">Username</label>
-            <input class="form-control"  id="username" name="username" type="text" value="<?php echo $data->username ?>" required>
-        </div>
-        <div class="group">
-            <label  class="">Password</label>
-            <input class="form-control"  id="password" name="password" type="text" value="<?php echo $data->password ?>" required>
-        </div>
-        <div class="group">
-            <label  class="">First Name</label>
-            <input class="form-control"  id="fname" name="fname" type="text" value="<?php echo $data->fname ?>" required>
-        </div>
-        <div class="group">
-            <label  class="">Last Name</label>
-            <input class="form-control"  id="lname" name="lname" type="text" value="<?php echo $data->lname ?>" required>
-        </div>
-        <div class="group">
-            <label  class="">Role</label><br>
-            <select name="role" type="radio" class="btn btn-default" value="<?php echo $data->role ?>" >
-                <option value="admin">admin</option>
-                <option value="cashier">cashier</option>
-                <option value="cashier">registrar</option>
-                <option value="cashier">guardian</option>
-              </select>
-        </div class="group">    
-        <div>
-            <br>
-            <input type="submit" class="btn btn-warning" name="submit" value="Update" style="font-size: 20px">
-        </div>                          
-    </form>
+                                    <div class="group"><input type="hidden" id="id" name="id" value="<?php echo $data->id ?>" required>
+                                    <div class="group"></div>
+                                        <label  class="">Username</label>
+                                        <input class="form-control"  id="username" name="username" type="text" value="<?php echo $data->username ?>" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">Password</label>
+                                        <input class="form-control"  id="password" name="password" type="text" value="<?php echo $data->password ?>" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">First Name</label>
+                                        <input class="form-control"  id="fname" name="fname" type="text" value="<?php echo $data->fname ?>" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">Last Name</label>
+                                        <input class="form-control"  id="lname" name="lname" type="text" value="<?php echo $data->lname ?>" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">Role</label><br>
+                                        <select name="role" type="radio" class="btn btn-default" value="<?php echo $data->role ?>" >
+                                            <option value="admin">admin</option>
+                                            <option value="cashier">cashier</option>
+                                            <option value="cashier">registrar</option>
+                                            <option value="cashier">guardian</option>
+                                        </select>
+                                    </div class="group">    
+                                    <div>
+                                        <br>
+                                        <input type="submit" class="btn btn-warning" name="submit" value="Update" style="font-size: 20px">
+                                    </div>                          
+                                </form>
                             </div>
-
-
                         </div>
                     </div>
                     <!-- /. ROW  -->
