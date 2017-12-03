@@ -1,7 +1,6 @@
-<?php include "../models/userModel.php"; ?>
+
 <?php
 	$db = new userModel();
-	$data['id'] = isset ($_REQUEST['id'])?$_REQUEST['id']:NUll;
 	$data['username'] = isset ($_REQUEST['username'])?$_REQUEST['username']:NUll;
 	$data['password'] = isset ($_REQUEST['password'])?$_REQUEST['password']:NUll;
 	$data['fname'] = isset ($_REQUEST['fname'])?$_REQUEST['fname']:NUll;
@@ -15,7 +14,7 @@
 			echo "okay";
 		}else echo "eroororor";
 		echo "<script>
-				window.location.href = \"viewUsers.php?select=yes\";
+				window.location.href = \"../views/admin1.php\";
 			</script>	
 				";
 

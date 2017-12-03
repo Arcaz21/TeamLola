@@ -55,7 +55,7 @@
 
 		function getUser($id) {
 			
-			$query = "SELECT username, password, fname, lname, role FROM users
+			$query = "SELECT id, username, password, fname, lname, role FROM users
 					  WHERE id = $id 
 					  ";
 					  
