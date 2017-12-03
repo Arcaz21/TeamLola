@@ -32,9 +32,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <div class="navbar-brand">
-                            <img height="110" src="../assets/img/euro.png" />
-                        </div>
                     </div>
                     <span class="logout-spn" >
                         <br>
@@ -53,13 +50,16 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                 <br>
                                     <div class="tab">
                                         <li class="active-link">
+                                         <center><img height="110" src="../assets/img/euro.png" /></center>   
+                                        </li>
+                                        <li class="active-link">
                                             <button class="tablinks" onclick="openCity(event, 'Students')" id="autoclick">Students  
                                                 <span class="badge"> Admin</span>
                                             </button>
                                         </li>
                                         <li class="active-link">
-                                            <button class="tablinks" onclick="openCity(event, 'Users')" id="autoclick">
-                                                <i class="fa fa-users"></i>  Users  
+                                            <button class="tablinks" onclick="openCity(event, 'Users')">
+                                                <i class="fa fa-users"></i>    Users  
                                                 <span class="badge"> Admin</span>
                                             </button>
                                         </li>
@@ -151,7 +151,7 @@ div.tab button {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 30px;
 }
 
 /* Change background color of buttons on hover */
