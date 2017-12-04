@@ -15,7 +15,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ADMIN</title>
         <!-- BOOTSTRAP STYLES-->
-        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"  />
         <!-- FONTAWESOME STYLES-->
         <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
@@ -67,14 +67,14 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         </li>
                         <li>
                             <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'Students')" id="defaultOpen">
-                                <i class="fa fa-child"></i>Students  
+                            <i class="fa fa-child"></i>Students  
                         
                             </a>
                         </li>
                         <li>
                             <a style="cursor: pointer;">
-                                <i class="fa fa-users"></i>Users 
-                                <span class="fa arrow"></span>
+                            <i class="fa fa-users"></i>Users 
+                            <span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -83,7 +83,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                     </a>
                                 </li>
                                 <li>
-                                    <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'Users')">
+                                    <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'addUser')">
                                         <i class="fa fa-user-plus "></i>Add New User
                                     </a>
                                 </li>
@@ -116,7 +116,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                     </thead>
                                     <tbody>
                                         <?php error_reporting(E_ERROR | E_PARSE); foreach ($rows as $index => $value): ?>
-                                        <tr>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
                                             <td>
                                                 <?php echo $value['username']; ?>
                                             </td>
@@ -133,8 +134,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                 <?php echo $value['role']; ?>
                                             </td>
                                             <td style="text-align: center;">
-                                                <a style="cursor: pointer;" href="viewUsers.php?select=yes&delete=yes&id=
-                                                    <?php echo $value['id']; ?>" class="btn btn-danger">Delete
+                                                <a style="cursor: pointer;" href="admin1.php?delete=yes&id=<?php echo $value['id']; ?>" 
+                                                class="btn btn-danger">Delete
                                                 </a>
                                             </td>
                                             <td style="text-align: center;">
@@ -149,8 +150,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                 <?php $data = $db -> getUser($idd); ?>
                                 <h3>Studeddd</h3>
                                 <form action="../controllers/usersFunction.php" method="POST">
-                                    <div class="group"><input type="hidden" id="id" name="id" value="<?php echo $data->id ?>" required>
-                                    <div class="group"></div>
+                                <div class="group"><input type="hidden" id="id" name="id" value="<?php echo $data->id ?>" required>
+                                    <div class="group">
                                         <label  class="">Username</label>
                                         <input class="form-control"  id="username" name="username" type="text" value="<?php echo $data->username ?>" required>
                                     </div>
@@ -174,12 +175,47 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             <option value="cashier">registrar</option>
                                             <option value="cashier">guardian</option>
                                         </select>
-                                    </div class="group">    
-                                    <div>
+                                    </div>
+                                    <div class="group">
                                         <br>
                                         <input type="submit" class="btn btn-warning" name="submit" value="Update" style="font-size: 20px">
+                                    </div>
                                     </div>                          
                                 </form>
+                                </div>
+
+                                
+                            <div id="addUser" class="tabcontent">
+                                    <form method="POST">
+                                    <div class="group"></div>
+                                        <label  class="">Username</label>
+                                        <input class="form-control"  id="username" name="username" type="text" placeholder="Username" required>
+                                    <div class="group">
+                                        <label  class="">Password</label>
+                                        <input class="form-control"  id="password" name="password" type="text" placeholder="Password" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">First Name</label>
+                                        <input class="form-control"  id="fname" name="fname" type="text" placeholder="Sidney Rose" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">Last Name</label>
+                                        <input class="form-control"  id="lname" name="lname" type="text" placeholder="Belleza" required>
+                                    </div>
+                                    <div class="group">
+                                        <label  class="">Role</label><br>
+                                        <select name="role" type="radio" class="btn btn-default" value="admin" >
+                                            <option value="admin">admin</option>
+                                            <option value="cashier">cashier</option>
+                                            <option value="cashier">registrar</option>
+                                            <option value="cashier">guardian</option>
+                                        </select>
+                                    </div>
+                                    <div class="group">
+                                        <br>
+                                        <input type="submit" class="btn btn-warning" name="submit" value="Add" style="font-size: 20px">
+                                    </div>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -199,10 +235,12 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
             </div>
             <!-- /. PAGE WRAPPER  -->
         </div>
+
         <!-- /. WRAPPER  -->
         <div id="footer-sec">
         &copy; TeamLula 2017
-    </div>
+        </div>
+
         <!-- /. FOOTER  -->
         <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
         <!-- JQUERY SCRIPTS -->

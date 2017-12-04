@@ -23,6 +23,9 @@ include "../models/userModel.php";
 			}else echo "wronggg";
 		}*/
 
+$delete = "no";
+$delete = isset ($_REQUEST['delete']) ? $_REQUEST['delete']:"no";
+
 $db = new userModel();
 $data['id'] = isset ($_REQUEST['id'])?$_REQUEST['id']:NUll;
 	$data['username'] = isset ($_REQUEST['username'])?$_REQUEST['username']:NUll;
@@ -31,19 +34,46 @@ $data['id'] = isset ($_REQUEST['id'])?$_REQUEST['id']:NUll;
 	$data['lname'] = isset ($_REQUEST['lname'])?$_REQUEST['lname']:NUll;
 	$data['role'] = isset ($_REQUEST['role'])?$_REQUEST['role']:NUll;
 
-	
+
+		//UPDATE
 		if (isset($_REQUEST['submit']) && $_REQUEST['submit'] == "Update") {
 		$db->update($data);
-		if($data){
+		if($db){	
+			echo "<script>
+			window.location.href = \"../views/admin1.php?view=yes\";
+		</script>	
+			";
+		}else{ echo "Error Updating";
+		
+		}
+		}
+
+		//ADD
+		if (isset ($_REQUEST['submit']) && $_REQUEST['submit'] == "Add"){
+		$db->add($data);
+		if($db){
+			echo "<script>
+			window.location.href = \"../views/admin1.php?view=yes\";
+		</script>	
+			";
+		}else{ echo "Error Adding";
 			
-		}else echo "eroororor";
-		echo "<script>
+		}
+		}
+		//DELETE
+		if ($delete == 'yes' && isset($id)){
+			$db->delete($id);
+			if($db){
+				echo "<script>
 				window.location.href = \"../views/admin1.php?view=yes\";
 			</script>	
 				";
+			}else{ echo "Error Deleting";
+				
+			}
+			}
 
-		
-	}
+
 
 
 	$userModel->close();
