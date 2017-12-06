@@ -53,22 +53,22 @@
 
 		}
 
-		function getUser($id) {
-			
-			$query = "SELECT id, username, password, fname, lname, role FROM users
-					  WHERE id = $id 
-					  ";
-					  
+			function getUser($id) {
+				
+				$query = "SELECT id, username, password, fname, lname, role FROM users
+						WHERE id = $id 
+						";
+						
 
-			$result = mysqli_query($this->conn, $query);
-			
-			if(!$result) {
-				die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+				$result = mysqli_query($this->conn, $query);
+				
+				if(!$result) {
+					die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+				}
+				$data = $result->fetch_object();
+				
+				return $data;
 			}
-			$data = $result->fetch_object();
-			
-			return $data;
-		}
 
 		function getUse($username) {
 			

@@ -31,21 +31,24 @@
                 session_start();
     $_SESSION['username'] =  $data->username;
     $_SESSION['password'] =  $data->password;
-    header("location:../views/admin.php");
+    $_SESSION['role'] =  $data->role;
+    header("location:../views/admin1.php");
                 endif; 
              if ($data->role == "cashier"): 
                
                 session_start();
     $_SESSION['username'] =  $data->username;
     $_SESSION['password'] =  $data->password;
-     header("location:../views/cashier.php");           
+    $_SESSION['role'] =  $data->role;
+     header("location:../views/cashier1.php");           
                 endif; 
              if ($data->role == "registrar"): 
                
                 session_start();
     $_SESSION['username'] =  $data->username;
     $_SESSION['password'] =  $data->password;
-     header("location:../views/registrar.php");           
+    $_SESSION['role'] =  $data->role;
+     header("location:../views/registrar1.php");           
                
              endif; 
              if ($data->role == "guardian"): 
@@ -53,13 +56,14 @@
                 session_start();
     $_SESSION['username'] =  $data->username;
     $_SESSION['password'] =  $data->password;
-     header("location:../views/guardian.php");          
+    $_SESSION['role'] =  $data->role;
+     header("location:../views/guardian1.php");          
              endif; 
  endif; ?>
 
 
         <?php if (!$LOGGED_IN): ?>
-            <div class="panel-heading">
+            <div class="panel-heading"  >
                  
                 <h2>Please Log In to Use</h2>
             </div>

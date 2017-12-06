@@ -28,7 +28,20 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
     </head>
     <body>
         <?php  $db = new userModel();
-            $data = $db->getUse($_SESSION['username']); ?>
+            $data = $db->getUse($_SESSION['username']);
+            if( ($_SESSION['role'] != "admin")){
+                if (($_SESSION['role'] == "cashier")) {
+                    header("location: cashier.php");
+                }
+                if (($_SESSION['role'] == "registrar")) {
+                    header("location: registrar1.php");
+                }
+                if (($_SESSION['role'] == "guardian")) {
+                    header("location: guardian1.php");
+                }
+}
+            ?>
+            
         <div id="wrapper">
             <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
@@ -72,7 +85,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             </a>
                         </li>
                         <li>
-                            <a style="cursor: pointer;">
+                            <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'Userslist')">
                             <i class="fa fa-users"></i>Users 
                             <span class="fa arrow"></span>
                             </a>
@@ -98,14 +111,19 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="page-head-line">To Edit</h1>
-                            <h1 class="page-subhead-line">aaaaaaaaaaaa </h1>
+                            <h1 class="page-subhead-line">
+                            <?php 
+                            if ( isset($_GET['view']) && $_GET['view'] == "yes" ){
+                                echo "Added Successfully";
+                            } ?>    
+                            </h1>
                             <div id="Students" class="tabcontent">
                                 <h3>Students</h3>
                             </div>
                             <div id="Userslist" class="tabcontent">
                                 <table >
                                     <thead>
-                                        <tr>
+                                        <tr >
                                             <th style="text-align: center;">Username</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
@@ -139,7 +157,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                 </a>
                                             </td>
                                             <td style="text-align: center;">
-                                                <a style="cursor: pointer;" class="tablinks" onclick="options(event, 'Usersupdate')" <?php  $idd=$value['id'] ?>> Update </a>
+                                                    
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -172,7 +190,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                         <select name="role" type="radio" class="btn btn-default" value="<?php echo $data->role ?>" >
                                             <option value="admin">admin</option>
                                             <option value="cashier">cashier</option>
-                                            <option value="cashier">registrar</option>
+                                            <option value=" ">registrar</option>
                                             <option value="cashier">guardian</option>
                                         </select>
                                     </div>
@@ -254,3 +272,10 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <script src="tabs.js"></script>
     </body>
 </html>
+<style type="text/css">
+/*    th, tr, td{
+ padding: 40px;
+ border: 1px solid blue;
+
+    }*/
+</style>
