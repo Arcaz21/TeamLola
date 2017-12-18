@@ -42,8 +42,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <center>
                             <div class="col-md-4"></div>
                             <!--   Basic Table  -->
-                            <form onSubmit="return validate();" action="
-                                <?php $_PHP_SELF ?>" method="POST">
+                            <form  action="<?php $_PHP_SELF ?>" method="POST">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4>Student</h4>

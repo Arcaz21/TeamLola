@@ -119,6 +119,13 @@ $studentModel = new studentModel();
 if($usern){
     	$userinfo = $studentModel->viewUinfo($usern);
     }
+
+ $searchname = isset ($_REQUEST['value']) ? $_REQUEST['value']:NULL;
+
+/*if($searchname){
+    	$searchf = $studentModel->searchN($searchname);
+    }*/
+
     if($lr){
          $grades = $studentModel->viewGrades($lr);
          $sname= $studentModel->viewSname($lr);
@@ -147,7 +154,7 @@ $guarduser = $studentModel->guardianuser();
         $newS['gLname']= isset($_REQUEST['gLname'])?$_REQUEST['gLname']:NULL;
         $newS['password']= isset($_REQUEST['password'])?$_REQUEST['password']:NULL;
         $newS['contact']= isset($_REQUEST['contact'])?$_REQUEST['contact']:NULL;
-        $newS['role']= "registrar";
+        $newS['role']= "guardian";
         
 
         $result = $db->addnewGuardian($newS);

@@ -314,7 +314,7 @@ from student WHERE levelID=11";
                     return ($result->num_rows>0)? $res: FALSE;
                 }
                 function viewSinfo($LRN){
-                    $query = "SELECT student.LRN, student.fName, student.lName, (select level.levelName from level where level.levelID=student.levelID) as level, student.age, student.mtongue, student.ipGroup, student.birthday, student.address, student.mother, student.father, (select guardian.fName from guardian where guardian.guardianID = student.guardianID) as guardianf, (select guardian.lName from guardian where guardian.guardianID = student.guardianID) as guardianl FROM student join guardian on student.guardianID = guardian.guardianID join level on level.levelID = student.levelID
+                    $query = "SELECT student.LRN, student.fName, student.lName, (select level.levelName from level where level.levelID=student.levelID) as level, student.age, student.mtongue, student.ipGroup, student.birthday, student.address, student.mother, student.father, (select guardian.fName from guardian where guardian.guardianID = student.guardianID) as guardianf, (select guardian.lName from guardian where guardian.guardianID = student.guardianID) as guardianl, (select guardian.contact from guardian where guardian.guardianID = student.guardianID) as contact FROM student join guardian on student.guardianID = guardian.guardianID join level on level.levelID = student.levelID
 						WHERE student.LRN = \"".$LRN."\" ";
                     $result = mysqli_query($this->conn, $query);
                     
@@ -336,6 +336,17 @@ from student WHERE levelID=11";
                     }
                     return ($result->num_rows>0)? $res: FALSE;
                 }
+                /*function searchN($searchname){
+                     $query = "SELECT * from student
+						WHERE fName LIKE \""%$searchname%"\" ";
+                    $result = mysqli_query($this->conn, $query);
+                    
+                    $res = array(); 
+                    while ($row = mysqli_fetch_array($result)){
+                        array_push($res, $row);
+                    }
+                    return ($result->num_rows>0)? $res: FALSE;
+                }*/
                 function deleteU($usern){
 			$query = "DELETE FROM users WHERE id = \"".$usern."\" ";
 

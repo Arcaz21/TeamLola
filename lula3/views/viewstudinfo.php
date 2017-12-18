@@ -132,10 +132,14 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
             </td>
         </tr>
         <tr>
-            <th>Guardian</th>
-            <td>
+            <th style="color: white; background-color: #5bc0de">Guardian</th>
+            <td style="color: white; background-color: #5bc0de">
                 <?php echo $value['guardianf']." ".$value['guardianl'] ?>
             </td>
+        </tr>
+        <tr>
+            <th style="color: white; background-color: #5bc0de">Guardian Contact No.</th>
+            <td style="color: white; background-color: #5bc0de"><?php echo $value['contact'] ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
