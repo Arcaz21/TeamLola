@@ -3,110 +3,110 @@
 
 <?php
 /*===================================================================================== FOR USER MODEL*/
-	class userModel extends DBconnection {
+    class userModel extends DBconnection {
 
-		function add($data){
+        function add($data){
 
-			$query = "INSERT INTO users (username, password, fname, lname, role) 
-			VALUES (
-			\"".$data['username']."\",
-			\"".$data['password']."\",
-			\"".$data['fname']."\",
-			\"".$data['lname']."\",
-			\"".$data['role']."\"
-			)";
+            $query = "INSERT INTO users (username, password, fname, lname, role) 
+            VALUES (
+            \"".$data['username']."\",
+            \"".$data['password']."\",
+            \"".$data['fname']."\",
+            \"".$data['lname']."\",
+            \"".$data['role']."\"
+            )";
 
-			$result = mysqli_query($this->conn, $query);
-			return (($result)? TRUE:FALSE);
-		}
+            $result = mysqli_query($this->conn, $query);
+            return (($result)? TRUE:FALSE);
+        }
 
-		function userExists($username, $password) {
-			
-			$query = "SELECT username, password, fname, lname, role FROM users
-					  WHERE username = \"".$username."\" AND password = \"".$password."\"
-					  LIMIT 1
-					  ";
-					  
+        function userExists($username, $password) {
+            
+            $query = "SELECT username, password, fname, lname, role FROM users
+                      WHERE username = \"".$username."\" AND password = \"".$password."\"
+                      LIMIT 1
+                      ";
+                      
 
-			$result = mysqli_query($this->conn, $query);
+            $result = mysqli_query($this->conn, $query);
 
-			if(!$result) {
-				die("<strong>WARNING:</strong><br>" . mysqli_error());
-			}
-			return (($result->num_rows==1)? TRUE: FALSE);
+            if(!$result) {
+                die("<strong>WARNING:</strong><br>" . mysqli_error());
+            }
+            return (($result->num_rows==1)? TRUE: FALSE);
 }
 
 
-		function selectAll(){
+        function selectAll(){
 
-			$query = "SELECT * FROM users";
-			$result = mysqli_query($this->conn, $query);
-
-
-			$res = array();
-			while ($row = mysqli_fetch_array($result)){
-				array_push($res, $row);
-			}
-
-			return ($result->num_rows>0)? $res: FALSE;
+            $query = "SELECT * FROM users";
+            $result = mysqli_query($this->conn, $query);
 
 
-		}
+            $res = array();
+            while ($row = mysqli_fetch_array($result)){
+                array_push($res, $row);
+            }
 
-			function getUser($id) {
-				
-				$query = "SELECT id, username, password, fname, lname, role FROM users
-						WHERE id = $id 
-						";
-						
+            return ($result->num_rows>0)? $res: FALSE;
 
-				$result = mysqli_query($this->conn, $query);
-				
-				if(!$result) {
-					die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
-				}
-				$data = $result->fetch_object();
-				
-				return $data;
-			}
 
-		function getUse($username) {
-			
-			$query = "SELECT username, password, fname, lname, role FROM users
-					  WHERE username = \"".$username."\"
-					  LIMIT 1
-					  ";
+        }
 
-			$result = mysqli_query($this->conn, $query);
-			
-			// if there is an error in your query, an error message is displayed.
-			if(!$result) {
-				die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
-			}
-			$row = $result->fetch_object();
-			return $row;
-		}
+            function getUser($id) {
+                
+                $query = "SELECT id, username, password, fname, lname, role FROM users
+                        WHERE id = $id 
+                        ";
+                        
 
-			
+                $result = mysqli_query($this->conn, $query);
+                
+                if(!$result) {
+                    die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+                }
+                $data = $result->fetch_object();
+                
+                return $data;
+            }
 
-		function update($data){
-			$query = "UPDATE users 
-					  SET 
-						username = \"".$data['username']."\",
-						password = \"".$data['password']."\",
-						fname = \"".$data['fname']."\",
-						lname = \"".$data['lname']."\",
-						role = \"".$data['role']."\"
-					  WHERE 
-					  id = \"".$data['id']."\"";		  	
-			$result = mysqli_query($this->conn, $query);
-			// if there is an error in your query, an error message is displayed.
-			if(!$result) {
-				die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
-			}
+        function getUse($username) {
+            
+            $query = "SELECT username, password, fname, lname, role FROM users
+                      WHERE username = \"".$username."\"
+                      LIMIT 1
+                      ";
 
-			return $result;
-		}
+            $result = mysqli_query($this->conn, $query);
+            
+            // if there is an error in your query, an error message is displayed.
+            if(!$result) {
+                die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+            }
+            $row = $result->fetch_object();
+            return $row;
+        }
+
+            
+
+        function update($data){
+            $query = "UPDATE users 
+                      SET 
+                        username = \"".$data['username']."\",
+                        password = \"".$data['password']."\",
+                        fname = \"".$data['fname']."\",
+                        lname = \"".$data['lname']."\",
+                        role = \"".$data['role']."\"
+                      WHERE 
+                      id = \"".$data['id']."\"";            
+            $result = mysqli_query($this->conn, $query);
+            // if there is an error in your query, an error message is displayed.
+            if(!$result) {
+                die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+            }
+
+            return $result;
+        }
         
 
 
@@ -144,7 +144,7 @@ class studentModel extends DBconnection {
                         return $result;                }
                 }
 
-            	function listStudentsk1(){
+                function listStudentsk1(){
                     $query = "SELECT * from student WHERE levelID = 11";
                     $result = mysqli_query($this->conn, $query);
                     $res = array();
@@ -326,7 +326,7 @@ from student WHERE levelID=11";
                 }
                 function viewSinfo($LRN){
                     $query = "SELECT student.LRN, student.fName, student.lName,(select level.levelName from level where level.levelID=student.levelID) as level, student.levelID, student.age, student.mtongue, student.ipGroup, student.birthday, student.address, student.mother, student.father, (select guardian.fName from guardian where guardian.guardianID = student.guardianID) as guardianf, (select guardian.lName from guardian where guardian.guardianID = student.guardianID) as guardianl, (select guardian.contact from guardian where guardian.guardianID = student.guardianID) as contact, guardian.guardianID FROM student join guardian on student.guardianID = guardian.guardianID join level on level.levelID = student.levelID
-						WHERE student.LRN = \"".$LRN."\" ";
+                        WHERE student.LRN = \"".$LRN."\" ";
                     $result = mysqli_query($this->conn, $query);
                     
                     $res = array(); 
@@ -338,7 +338,7 @@ from student WHERE levelID=11";
 
                 function viewUinfo($usern){
                      $query = "SELECT * from users
-						WHERE id = \"".$usern."\" ";
+                        WHERE id = \"".$usern."\" ";
                     $result = mysqli_query($this->conn, $query);
                     
                     $res = array(); 
@@ -349,7 +349,7 @@ from student WHERE levelID=11";
                 }
                 /*function searchN($searchname){
                      $query = "SELECT * from student
-						WHERE fName LIKE \""%$searchname%"\" ";
+                        WHERE fName LIKE \""%$searchname%"\" ";
                     $result = mysqli_query($this->conn, $query);
                     
                     $res = array(); 
@@ -359,9 +359,9 @@ from student WHERE levelID=11";
                     return ($result->num_rows>0)? $res: FALSE;
                 }*/
                 function deleteS($lr){
-			$query = "DELETE FROM student WHERE LRN = \"".$lr."\" ";
+            $query = "DELETE FROM student WHERE LRN = \"".$lr."\" ";
             
-			$result = mysqli_query($this->conn, $query);
+            $result = mysqli_query($this->conn, $query);
                         
                        
                     // if there is an error in your query, an error message is displayed.
@@ -372,7 +372,7 @@ from student WHERE levelID=11";
                         
                         return $result;
                     }
-		}
+        }
         function deleteG($guardlr){
             $query = "DELETE FROM guardian WHERE guardianID = \"".$guardlr."\" ";
            
@@ -419,7 +419,7 @@ from student WHERE levelID=11";
                     }
         }
 
-				function guardianuser(){
+                function guardianuser(){
                     $query = "SELECT guardianID FROM guardian ";
                     $result = mysqli_query($this->conn, $query);
                     
@@ -579,7 +579,7 @@ from student WHERE levelID=11";
                     }
     }
 
-    	function updateStudent($editS){
+        function updateStudent($editS){
                     $query=" UPDATE student  
                     SET LRN = \"".$editS['LRN']."\", 
                     fName = \"".$editS['fName']."\",
@@ -594,7 +594,7 @@ from student WHERE levelID=11";
                     father=\"".$editS['father']."\"
                     WHERE LRN = \"".$editS['LRN']."\"";
                 
-        $result = mysqli_query($this->conn, $query);
+                    $result = mysqli_query($this->conn, $query);
                     // if there is an error in your query, an error message is displayed.
                     if(!$result) {
                         die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
@@ -602,7 +602,19 @@ from student WHERE levelID=11";
                         /*echo "<script>alert('Edit Successful!')</script>";*/
                         return $result;
                     }
-    }
+        }
+        function checkBalance($lrn){
+            $query = "SELECT student.LRN,fName, lName,(level.levelName) as level_name, (s_account.misc_balance) as misc, (s_account.tuition_balance) as tuition, (s_account.entrance_balance) as entrance, (student.levelID) as levelID from student
+            JOIN s_account ON student.LRN = s_account.LRN
+            JOIN level ON student.levelID = level.levelID
+            WHERE student.LRN = $lrn";
+            $result = mysqli_query($this->conn, $query);
+            $res = array();
+            while ($row = mysqli_fetch_array($result)){
+                array_push($res, $row);
             }
+            return ($result->num_rows>0)? $res: FALSE;
+        }
+}
 
 ?>

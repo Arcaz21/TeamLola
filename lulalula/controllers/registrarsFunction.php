@@ -2,14 +2,14 @@
 <?php
 
 include "../models/registrarsModel.php"; 
-	$username = isset ($_REQUEST['username']) ? $_REQUEST['username']:NULL;
-	$id = isset ($_REQUEST['id']) ? $_REQUEST['id']:NULL;
-	$userModel = new userModel();
+    $username = isset ($_REQUEST['username']) ? $_REQUEST['username']:NULL;
+    $id = isset ($_REQUEST['id']) ? $_REQUEST['id']:NULL;
+    $userModel = new userModel();
 //----------------------------------View all user in a table
-	
-		$rows = $userModel->selectAll();
-	
-	
+    
+        $rows = $userModel->selectAll();
+    
+    
 
 
 
@@ -26,10 +26,10 @@ $studentModel = new studentModel();
 
     $db = new studentModel();
     $data['LRN'] = isset ($_REQUEST['LRN'])?$_REQUEST['LRN']:NUll;
-	$data['username'] = isset ($_REQUEST['username'])?$_REQUEST['username']:NUll;
-	$data['password'] = isset ($_REQUEST['password'])?$_REQUEST['password']:NUll;
-	$data['fname'] = isset ($_REQUEST['fname'])?$_REQUEST['fname']:NUll;
-	$data['lname'] = isset ($_REQUEST['lname'])?$_REQUEST['lname']:NUll;
+    $data['username'] = isset ($_REQUEST['username'])?$_REQUEST['username']:NUll;
+    $data['password'] = isset ($_REQUEST['password'])?$_REQUEST['password']:NUll;
+    $data['fname'] = isset ($_REQUEST['fname'])?$_REQUEST['fname']:NUll;
+    $data['lname'] = isset ($_REQUEST['lname'])?$_REQUEST['lname']:NUll;
     $data['role'] = isset ($_REQUEST['role'])?$_REQUEST['role']:NUll;
     
     $viewgrade = "no";
@@ -121,7 +121,7 @@ $guarduser = $studentModel->guardianuser();
     if(isset($_REQUEST['submit']) && $_REQUEST['submit'] == "SUBMIT NEW USER"){
         $newU['username']= isset($_REQUEST['username'])?$_REQUEST['username']:NULL;
         $newU['password']= isset($_REQUEST['password'])?$_REQUEST['password']:NULL;
-      	$newU['fName']= isset($_REQUEST['fName'])?$_REQUEST['fName']:NULL;
+        $newU['fName']= isset($_REQUEST['fName'])?$_REQUEST['fName']:NULL;
         $newU['lName']= isset($_REQUEST['lName'])?$_REQUEST['lName']:NULL;
         $newU['role']= isset($_REQUEST['role'])?$_REQUEST['role']:NULL;
         
@@ -154,12 +154,30 @@ $guarduser = $studentModel->guardianuser();
         $editS['father']= isset($_REQUEST['father'])?$_REQUEST['father']:NULL;
         $editS['mother']= isset($_REQUEST['mother'])?$_REQUEST['mother']:NULL;
 
-        $result = $db->updateStudent($editS);
-        if($result){
+        
+        $check = $db->checkBalance($editS['LRN']);
+        error_reporting(E_ERROR | E_PARSE); foreach ($check as $index => $check):
+        if($check['levelID'] != $editS['levelID']){
+            echo $check['misc']." ".$check['tuition']." ".$check['entrance'];
+            if($check['misc'] == 0 && $check['tution'] == 0 && $check['entrance'] == 0){
+            $result = $db->updateStudent($editS);
+            if($result){
             echo "<script>alert('Student Information Updated!')</script>";
-        	echo "<meta http-equiv='refresh' content='0'>";
-        }else{ echo "wrong";}
+            echo "<meta http-equiv='refresh' content='0'>";
+            }else{ echo "wrong";}
 
+            }else{
+                echo "<script>alert('Can Not Update student )</script>";
+                echo "<meta http-equiv='refresh' content='0'>";
+            }
+        }else{
+            $result = $db->updateStudent($editS);
+            if($result){
+            echo "<script>alert('Student Information Updated!')</script>";
+            echo "<meta http-equiv='refresh' content='0'>";
+        }
+        }
+        endforeach;
     }
 
     if(isset($_REQUEST['submit']) && $_REQUEST['submit'] == "YES PLEASE"){
@@ -179,7 +197,7 @@ $guarduser = $studentModel->guardianuser();
             echo "<meta http-equiv='refresh' content='0'>";
         }
         if($result2){
-        	echo "<meta http-equiv='refresh' content='0'>";
+            echo "<meta http-equiv='refresh' content='0'>";
         }
         if($result3){
             echo "<meta http-equiv='refresh' content='0'>";
@@ -224,47 +242,6 @@ $guarduser = $studentModel->guardianuser();
                         ";
         }else{}
     }
+    $userModel->close();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	$userModel->close();
 ?>
