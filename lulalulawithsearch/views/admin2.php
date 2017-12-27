@@ -38,7 +38,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="admin.php">
+                    <a class="navbar-brand" href="admin1.php?sy=17-18">
                         <img style="margin-top: -20px;" height="60" src="assets/img/corner.gif" />
                     </a>
                 </div>
@@ -66,7 +66,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             </a>
                         </li> -->
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="admin1.php">
+                            <a style="cursor: pointer;" class="tablinks" href="admin1.php?sy=17-18">
                                 <i class="fa fa-child"></i>Students  
                         
                             </a>

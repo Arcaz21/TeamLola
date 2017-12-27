@@ -38,7 +38,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="admin1.php">
+                    <a class="navbar-brand" href="admin1.php?sy=17-18">
                         <img style="margin-top: -20px;" height="60" src="assets/img/corner.gif" />
                     </a>
                 </div>
@@ -66,7 +66,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             </a>
                         </li> -->
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="admin1.php">
+                            <a style="cursor: pointer;" class="tablinks" href="admin1.php?sy=17-18">
                                 <i class="fa fa-child"></i>Students  
                         
                             </a>
@@ -114,15 +114,104 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
     </div>
   </div> -->
 
+<!-- SEARCH -->
+<form action="<?php $_PHP_SELF ?>" method="POST">
+    <div class="col-md-9">
+        <table class="table table-striped table-bordered table-hover">
+          
+                                                    
+                                                            <tr>
+                                                                <td>
+                                                                    <input  class="form-control" type="text" name="search" required="" placeholder="search for LRN,  Student's First/Last Name, or '17-18' as School Year" />
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    <input class="btn btn-md btn-info" value="SEARCH" type="submit" name="submit">
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                    </table>
+    </div>
+       
+</form>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <?php   error_reporting(E_ERROR | E_PARSE); echo "<br><br><br><i><h3>".$res."</h3></i>"; 
+                                    if (!$res && $search) {
+                                        ?>
+                                        <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;">Level</th>
+                                            <th style="text-align: center;">SY</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                        <?php
+                                    }
+
+                                    foreach ($search as $index => $value):
+                                    
+                                     ?>
+                                    
+
+                                    
+                                    <tbody>
+                                        
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php if($value['levelID'] == 11){echo "Kinder 1";}
+                                                        if($value['levelID'] == 22){echo "Kinder 2";}
+                                                            if($value['levelID'] == 1){echo "Grade 1";}
+                                                                if($value['levelID'] == 2){echo "Grade 2";}
+                                                                    if($value['levelID'] == 3){echo "Grade 3";}
+                                                  ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['syid']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                                <h1 class="page-subhead-line">
+<!-- END OF SEARCH -->
+<div class="col-md-4"> 
+         <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn dropdown-toggle">School Year <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="admin1.php?sy=16-17">SY 2016-2017</a></li>
+                                            <li><a href="admin1.php?sy=17-18">SY 2017-2018</a></li>
+                                            <li><a href="admin1.php?sy=18-19">SY 2018-2019</a></li>
+                                            <li><a href="admin1.php?sy=19-20">SY 2019-2020</a></li>
+                                        </ul>
+</div>
+    </div> <br>
 
 
-                            <div id="Students" class="tabcontent">
-<center><h1 class="page-head-line">Students List</h1></center>
-                            <h1 class="page-subhead-line"> </h1>
-
-
-
-
+<?php $sy=isset($_REQUEST['sy'])?$_REQUEST['sy']:NULL;
+if($sy == "16-17"){
+?>
+<div>
+<center><h1 class="page-head-line">Students List (SY 16-17)</h1></center>
 <!-- KINDER 1  -->
 <h2>Kinder 1</h2>
                                 <table class="table table-striped table-bordered table-hover">
@@ -131,12 +220,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             <th style="text-align: center;">LRN</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
-                                            <th style="text-align: center;">Action</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk1 as $index => $value): ?>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk1 as $index => $value): if($value['syid'] =="16-17"){ ?>
                                         <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
                                             <input type="hidden" value="<?php echo $value['id']; ?>">
                                             <td>
                                                 <?php echo $value['LRN']; ?>
@@ -152,9 +242,9 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                     <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
                                                     </center>
                                             </td>
-
+                                           
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php } endforeach;  ?>
                                     </tbody>
                                 </table>
                                 <!-- content end -->
@@ -168,12 +258,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             <th style="text-align: center;">LRN</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
-                                            <th style="text-align: center;">Action</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk2 as $index => $value): ?>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk2 as $index => $value): if($value['syid'] =="16-17"){ ?>
                                         <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
                                             <input type="hidden" value="<?php echo $value['id']; ?>">
                                             <td>
                                                 <?php echo $value['LRN']; ?>
@@ -189,9 +280,9 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                     <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
                                                     </center>
                                             </td>
-
+                                            
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php } endforeach; ?>
                                     </tbody>
                                 </table>
                                 <!-- content end -->
@@ -205,12 +296,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             <th style="text-align: center;">LRN</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
-                                            <th style="text-align: center;">Action</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg1 as $index => $value): ?>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg1 as $index => $value): if($value['syid'] =="16-17"){ ?>
                                         <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
                                             <input type="hidden" value="<?php echo $value['id']; ?>">
                                             <td>
                                                 <?php echo $value['LRN']; ?>
@@ -226,9 +318,9 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                     <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
                                                     </center>
                                             </td>
-
+                                           
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php } endforeach; ?>
                                     </tbody>
                                 </table>
                                 <!-- content end -->
@@ -242,12 +334,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             <th style="text-align: center;">LRN</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
-                                            <th style="text-align: center;">Action</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg2 as $index => $value): ?>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg2 as $index => $value): if($value['syid'] =="16-17"){ ?>
                                         <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
                                             <input type="hidden" value="<?php echo $value['id']; ?>">
                                             <td>
                                                 <?php echo $value['LRN']; ?>
@@ -263,9 +356,9 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                     <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
                                                     </center>
                                             </td>
-
+                                           
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php } endforeach; ?>
                                     </tbody>
                                 </table>
                                 <!-- content end -->
@@ -279,12 +372,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             <th style="text-align: center;">LRN</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
-                                            <th style="text-align: center;">Action</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg3 as $index => $value): ?>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg3 as $index => $value): if($value['syid'] =="16-17"){ ?>
                                         <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
                                             <input type="hidden" value="<?php echo $value['id']; ?>">
                                             <td>
                                                 <?php echo $value['LRN']; ?>
@@ -300,15 +394,620 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                     <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
                                                     </center>
                                             </td>
-
+                                           
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">        
+</div>
+
+<?php
+}
+?>
+<?php
+if($sy == "17-18"){
+?>
+<div>
+<center><h1 class="page-head-line">Students List (SY 17-18)</h1></center>
+<!-- KINDER 1  -->
+<h2>Kinder 1</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk1 as $index => $value): if($value['syid'] =="17-18"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach;  ?>
                                     </tbody>
                                 </table>
                                 <!-- content end -->
                             
                                 <h1 class="page-subhead-line">
+<!-- KINDER 2  -->
+<h2>Kinder 2</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk2 as $index => $value): if($value['syid'] =="17-18"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- Grade 1  -->
+<h2>Grade 1</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg1 as $index => $value): if($value['syid'] =="17-18"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                           
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- GRADE 2  -->
+<h2>Grade 2</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg2 as $index => $value): if($value['syid'] =="17-18"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- GRADE 3  -->
+<h2>Grade 3</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg3 as $index => $value): if($value['syid'] =="17-18"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">    
 </div>
+
+<?php
+}
+?>
+<?php
+if($sy == "18-19"){
+?>
+<div>
+<center><h1 class="page-head-line">Students List (SY 18-19)</h1></center>
+<!-- KINDER 1  -->
+<h2>Kinder 1</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk1 as $index => $value): if($value['syid'] =="18-19"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach;  ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- KINDER 2  -->
+<h2>Kinder 2</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk2 as $index => $value): if($value['syid'] =="18-19"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- Grade 1  -->
+<h2>Grade 1</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg1 as $index => $value): if($value['syid'] =="18-19"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- GRADE 2  -->
+<h2>Grade 2</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg2 as $index => $value): if($value['syid'] =="18-19"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- GRADE 3  -->
+<h2>Grade 3</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg3 as $index => $value): if($value['syid'] =="18-19"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">            
+</div>
+
+<?php
+}
+?> 
+<?php
+if($sy == "19-20"){
+?>
+<div>
+<center><h1 class="page-head-line">Students List (SY 19-20)</h1></center>
+<!-- KINDER 1  -->
+<h2>Kinder 1</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk1 as $index => $value): if($value['syid'] =="19-20"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach;  ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- KINDER 2  -->
+<h2>Kinder 2</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsk2 as $index => $value): if($value['syid'] =="19-20"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                           
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- Grade 1  -->
+<h2>Grade 1</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg1 as $index => $value): if($value['syid'] =="19-20"){ ?>
+                                        <tr>  
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- GRADE 2  -->
+<h2>Grade 2</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg2 as $index => $value): if($value['syid'] =="19-20"){ ?>
+                                        <tr>
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                            
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">
+<!-- GRADE 3  -->
+<h2>Grade 3</h2>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <th style="text-align: center;">LRN</th>
+                                            <th style="text-align: center;">First Name</th>
+                                            <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;" colspan="4" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php error_reporting(E_ERROR | E_PARSE); foreach ($rowsg3 as $index => $value): if($value['syid'] =="19-20"){ ?>
+                                        <tr>  
+                                            
+                                            <input type="hidden" value="<?php echo $value['editable']; ?>">
+                                            <input type="hidden" value="<?php echo $value['id']; ?>">
+                                            <td>
+                                                <?php echo $value['LRN']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['fName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a type="button" class="btn btn-info " <?php  $lr=$value['LRN']; ?> href="viewstudinfo.php?value=<?php echo $lr ?>" data-toggle="modal" data-target="#theModal">More</a>
+                                                    </center>
+                                            </td>
+                                           
+                                        </tr>
+                                        <?php } endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <!-- content end -->
+                            
+                                <h1 class="page-subhead-line">                
+</div>
+
+<?php
+}
+?>
 
 
 

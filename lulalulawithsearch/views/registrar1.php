@@ -74,7 +74,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             </center>
                         </li>
                        <li>
-                            <a style="cursor: pointer;" class="tablinks" href="registrar1.php">
+                            <a style="cursor: pointer;" class="tablinks" href="registrar1.php?sy=17-18">
                                 <i class="fa fa-child"></i>Students  
                             </a>
                         </li>

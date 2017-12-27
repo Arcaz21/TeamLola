@@ -273,7 +273,17 @@ $guarduser = $studentModel->guardianuser();
 
 
 
-
+if(isset($_REQUEST['submit']) && $_REQUEST['submit'] == "SEARCH"){
+    $se['search']= isset($_REQUEST['search'])?$_REQUEST['search']:NULL;
+        $search = $db->search($se);
+        
+        if($search){
+            return $search;
+        }else{
+            $res = "no results found";
+            return $res;
+        }
+    }
 
 
 

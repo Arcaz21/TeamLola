@@ -557,6 +557,19 @@ from student WHERE levelID=11";
                     }else{
                         return $result;                }
                 }
+function search($se){
+                    $query = "SELECT * from student WHERE LRN LIKE '%".$se['search']."%' OR fName LIKE '%".$se['search']."%' OR lName LIKE '%".$se['search']."%' OR syid LIKE '%".$se['search']."%' ";
+                    $result = mysqli_query($this->conn, $query);
+                    $res = array();
+
+                    while ($row = mysqli_fetch_array($result)){
+                        array_push($res, $row);
+                    }
+                    return ($result->num_rows>0)? $res: FALSE;
+                    
+                }
+            
+
 }
 
 ?>
