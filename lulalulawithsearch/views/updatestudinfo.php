@@ -86,7 +86,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                                 <th>School Year</th>
                                                                 <td>
                                                                     <select name="syid" class="form-control" required="required">
-                                                                        <option value="<?php echo $value['syid'] ?>" >Same SY</option>
                                                                         <option value="17-18">SY 2017-2018</option>
                                                                         <option value="18-19">SY 2018-2019</option>
                                                                         <option value="19-20">SY 2019-2020</option>

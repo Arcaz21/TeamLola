@@ -126,7 +126,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
 
 
                             <div id="Students" class="tabcontent">
-<center><h1 class="page-head-line">Students List</h1></center>
+
                             
 <!-- SEARCH -->
 <form action="<?php $_PHP_SELF ?>" method="POST">
@@ -146,25 +146,33 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                                     </table>
     </div>
         
-    </form>
+</form>
 
 
                                 <table class="table table-striped table-bordered table-hover">
-                                    <?php error_reporting(E_ERROR | E_PARSE); foreach ($search as $index => $value):
-                                    if($search == "no") { echo "wala";}
-                                    print_r($search);
-                                     ?>
-                                    
-
-                                    <thead>
+                                    <?php   error_reporting(E_ERROR | E_PARSE); echo "<br><br><br><i><h3>".$res."</h3></i>"; 
+                                    if (!$res && $search) {
+                                        ?>
+                                        <thead>
                                         <tr class="success">
                                             <th style="text-align: center;"></th>
                                             <th style="text-align: center;">LRN</th>
                                             <th style="text-align: center;">First Name</th>
                                             <th style="text-align: center;">Last Name</th>
+                                            <th style="text-align: center;">Level</th>
+                                            <th style="text-align: center;">SY</th>
                                             <th style="text-align: center;" colspan="4" >Action</th>
                                         </tr>
                                     </thead>
+                                        <?php
+                                    }
+
+                                    foreach ($search as $index => $value):
+                                    
+                                     ?>
+                                    
+
+                                    
                                     <tbody>
                                         
                                         <tr>  
@@ -184,6 +192,17 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                             </td>
                                             <td>
                                                 <?php echo $value['lName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php if($value['levelID'] == 11){echo "Kinder 1";}
+                                                        if($value['levelID'] == 22){echo "Kinder 2";}
+                                                            if($value['levelID'] == 1){echo "Grade 1";}
+                                                                if($value['levelID'] == 2){echo "Grade 2";}
+                                                                    if($value['levelID'] == 3){echo "Grade 3";}
+                                                  ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value['syid']; ?>
                                             </td>
                                             <td>
                                                 <center>
@@ -214,7 +233,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             
                                 <h1 class="page-subhead-line">
 <!-- END OF SEARCH -->
-
+<center><h1 class="page-head-line">Students List (SY 17-18)</h1></center>
 <!-- KINDER 1  -->
 <h2>Kinder 1</h2>
                                 <table class="table table-striped table-bordered table-hover">

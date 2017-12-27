@@ -149,28 +149,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
     </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- KINDER 1  -->
-
                                 <table class="table table-striped table-bordered table-hover"><?php error_reporting(E_ERROR | E_PARSE); foreach ($search as $index => $value): ?>
                                     <thead>
                                         <tr class="success">

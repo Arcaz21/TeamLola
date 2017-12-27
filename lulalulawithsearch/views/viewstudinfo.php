@@ -6,7 +6,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
     
 }
 ?>
-<?php include "../controllers/adminsFunction.php";
+<?php include "../controllers/registrarsFunction.php";
  ?>
         
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                 
 <center>
     <table class="table table-striped table-bordered table-hover">
-        <?php error_reporting(E_ERROR | E_PARSE); foreach ($studinfo as $index => $value): ?>
+        <?php error_reporting(E_ERROR | E_PARSE); foreach ($studinfo as $index => $value): ?> 
         <tr>
             <th>LRN</th>
             <td>
@@ -87,6 +87,12 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
             <th>Level</th>
             <td>
                 <?php echo $value['level'] ?>
+            </td>
+        </tr>
+        <tr>
+            <th>School Year</th>
+            <td>
+                <?php echo $value['syname'] ?>
             </td>
         </tr>
         <tr>

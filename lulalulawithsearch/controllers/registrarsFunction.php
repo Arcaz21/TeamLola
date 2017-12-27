@@ -49,18 +49,13 @@ $studentModel = new studentModel();
 
 
 
-    $gk1 = $studentModel->gk1();
-    $gk2 = $studentModel->gk2();
-    $gg1 = $studentModel->gg1();
-    $gg2 = $studentModel->gg2();
-    $gg3 = $studentModel->gg3();
+
 
 
 
 
 
     if($lr){
-         $grades = $studentModel->viewGrades($lr);
          $sname= $studentModel->viewSname($lr);
          $studinfo = $studentModel->viewSinfo($lr);
     }
@@ -68,7 +63,6 @@ $studentModel = new studentModel();
 
 $guarduser = $studentModel->guardianuser();
 
-    $addGrades = $studentModel->viewGrades($lr);
 
         if(isset($_REQUEST['submit']) && $_REQUEST['submit'] == "SUBMIT NEW STUDENT"){
         $newS['LRN']= isset($_REQUEST['LRN'])?$_REQUEST['LRN']:NULL;
@@ -171,7 +165,11 @@ $guarduser = $studentModel->guardianuser();
       
 
         $result = $db->updateSY($updateS);
+        $result2 = $db->updateSYtolevel($updateS);
         if($result){
+            echo "<meta http-equiv='refresh' content='0'>";
+        }else{ echo "wrong";}
+        if($result2){
             echo "<meta http-equiv='refresh' content='0'>";
         }else{ echo "wrong";}
 
@@ -267,7 +265,8 @@ if(isset($_REQUEST['submit']) && $_REQUEST['submit'] == "SEARCH"){
         if($search){
             return $search;
         }else{
-            return "no";
+            $res = "no results found";
+            return $res;
         }
     }
 

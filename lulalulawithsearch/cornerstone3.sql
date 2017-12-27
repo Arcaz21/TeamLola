@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2017 at 07:36 AM
+-- Generation Time: Dec 27, 2017 at 02:59 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -54,6 +54,7 @@ CREATE TABLE `guardian` (
 --
 
 INSERT INTO `guardian` (`guardianID`, `fName`, `lName`, `contact`, `password`) VALUES
+('9090', '9090', '9090', '9090', '9090'),
 ('Angel', 'Guardian', 'Angel', '9784596587', 'guardianangel'),
 ('ggna', 'Father', 'Over', '9356902297', '123'),
 ('Print', 'Print', 'Print', '9476965516', 'Screen'),
@@ -114,6 +115,28 @@ INSERT INTO `level` (`levelID`, `levelName`, `TuitionFee`, `Misc`, `Entrance`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `records`
+--
+
+CREATE TABLE `records` (
+  `LRN` varchar(12) NOT NULL,
+  `syid` varchar(20) NOT NULL,
+  `levelID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `records`
+--
+
+INSERT INTO `records` (`LRN`, `syid`, `levelID`) VALUES
+('9090 ', '17-18', 11),
+('9090', '18-19', 11),
+('9090', '18-19', 11),
+('9090', '18-19', 11);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
@@ -129,19 +152,22 @@ CREATE TABLE `student` (
   `address` text NOT NULL,
   `mother` varchar(50) NOT NULL,
   `father` varchar(50) NOT NULL,
-  `guardianID` varchar(11) NOT NULL
+  `guardianID` varchar(11) NOT NULL,
+  `editable` enum('yes','no') NOT NULL DEFAULT 'yes',
+  `syid` varchar(20) NOT NULL DEFAULT '17-18'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`LRN`, `fName`, `lName`, `levelID`, `age`, `mtongue`, `ipGroup`, `birthday`, `address`, `mother`, `father`, `guardianID`) VALUES
-('111111111117', 'Chin', 'Lu', 3, 21, 'Chinese', 'Ducks', '2004-12-31', 'China', 'ChinaLu', 'PhilLu', 'Angel'),
-('111111115848', 'Sid', 'Belleza', 2, 12, 'Bisaya', 'Bisaya', '2017-12-06', 'Samal', 'Samal', 'Samal', 'Print'),
-('20170001', 'Nadine', 'Lostrid', 11, 4, 'Bisaya', 'Matigsalug', '2012-06-20', 'Davao City', 'Father Lostrid', 'Mother Lostrid', 'tellme'),
-('20170002', 'Jaye', 'Hanash', 22, 5, 'Bisaya', 'Aeta', '2011-08-24', 'Davao City', 'Father Hanash', 'Mother Hanash', 'sigeghanash'),
-('201700033', 'Game', 'Over', 1, 6, 'Bisaya', 'Ingles', '2010-10-26', 'Davao', 'Mother Over', 'Father Over', 'ggna');
+INSERT INTO `student` (`LRN`, `fName`, `lName`, `levelID`, `age`, `mtongue`, `ipGroup`, `birthday`, `address`, `mother`, `father`, `guardianID`, `editable`, `syid`) VALUES
+('111111111117', 'Chin', 'Lu', 3, 21, 'Chinese', 'Ducks', '2004-12-31', 'China', 'ChinaLu', 'PhilLu', 'Angel', 'yes', '17-18'),
+('111111115848', 'Sid', 'Belleza', 2, 12, 'Bisaya', 'Bisaya', '2017-12-06', 'Samal', 'Samal', 'Samal', 'Print', 'yes', '17-18'),
+('20170001', 'Nadine', 'Lostrid', 11, 4, 'Bisaya', 'Matigsalug', '2012-06-20', 'Davao City', 'Father Lostrid', 'Mother Lostrid', 'tellme', 'yes', '17-18'),
+('20170002', 'Jaye', 'Hanash', 22, 5, 'Bisaya', 'Aeta', '2011-08-24', 'Davao City', 'Father Hanash', 'Mother Hanash', 'sigeghanash', 'yes', '17-18'),
+('201700033', 'Game', 'Over', 1, 6, 'Bisaya', 'Ingles', '2010-10-26', 'Davao', 'Mother Over', 'Father Over', 'ggna', 'yes', '17-18'),
+('9090', '9090', '9090', 11, 90, '9090', '9090', '0099-09-09', '9090', '9090', '9090', '9090', 'no', '18-19');
 
 -- --------------------------------------------------------
 
@@ -203,6 +229,27 @@ INSERT INTO `subject` (`subjectID`, `subjectName`, `levelID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sy`
+--
+
+CREATE TABLE `sy` (
+  `syid` varchar(20) NOT NULL,
+  `syname` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sy`
+--
+
+INSERT INTO `sy` (`syid`, `syname`) VALUES
+('16-17', 'SY 2016-2017'),
+('17-18', 'SY 2017-2018'),
+('18-19', 'SY 2018-2019'),
+('19-20', 'SY 2019-2020');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `s_account`
 --
 
@@ -224,7 +271,8 @@ INSERT INTO `s_account` (`Acc_num`, `LRN`, `misc_Balance`, `tuition_Balance`, `e
 (8, '20170002', '6000.00', '1100.00', '2500.00', '9600.00'),
 (9, '201700033', '6000.00', '1200.00', '2500.00', '9700.00'),
 (10, '111111115848', '6000.00', '1200.00', '2500.00', '9700.00'),
-(11, '111111111117', '6000.00', '1200.00', '2500.00', '9700.00');
+(11, '111111111117', '6000.00', '1200.00', '2500.00', '9700.00'),
+(16, '9090', '6000.00', '1100.00', '2500.00', '9600.00');
 
 -- --------------------------------------------------------
 
@@ -254,7 +302,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `fname`, `lname`, `role`) VAL
 (51, 'sigeghanash', '123', 'Father', 'Hanash', 'guardian'),
 (52, 'ggna', '123', 'Father', 'Over', 'guardian'),
 (53, 'Print', 'Screen', 'Print', 'Print', 'guardian'),
-(54, 'Angel', 'guardianangel', 'Guardian', 'Angel', 'guardian');
+(54, 'Angel', 'guardianangel', 'Guardian', 'Angel', 'guardian'),
+(63, '9090', '9090', '9090', '9090', 'guardian');
 
 --
 -- Indexes for dumped tables
@@ -289,12 +338,21 @@ ALTER TABLE `level`
   ADD PRIMARY KEY (`levelID`);
 
 --
+-- Indexes for table `records`
+--
+ALTER TABLE `records`
+  ADD KEY `fklrn` (`LRN`),
+  ADD KEY `syidfk` (`syid`),
+  ADD KEY `levelIDfk` (`levelID`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`LRN`),
   ADD KEY `lfk` (`levelID`),
-  ADD KEY `guardianfk` (`guardianID`);
+  ADD KEY `guardianfk` (`guardianID`),
+  ADD KEY `syfk` (`syid`);
 
 --
 -- Indexes for table `subject`
@@ -302,6 +360,12 @@ ALTER TABLE `student`
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subjectID`),
   ADD KEY `fklvl` (`levelID`);
+
+--
+-- Indexes for table `sy`
+--
+ALTER TABLE `sy`
+  ADD PRIMARY KEY (`syid`);
 
 --
 -- Indexes for table `s_account`
@@ -329,12 +393,12 @@ ALTER TABLE `grade`
 -- AUTO_INCREMENT for table `s_account`
 --
 ALTER TABLE `s_account`
-  MODIFY `Acc_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Acc_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- Constraints for dumped tables
 --
@@ -353,10 +417,19 @@ ALTER TABLE `invoice`
   ADD CONSTRAINT `studFK` FOREIGN KEY (`LRN`) REFERENCES `student` (`LRN`);
 
 --
+-- Constraints for table `records`
+--
+ALTER TABLE `records`
+  ADD CONSTRAINT `fklrn` FOREIGN KEY (`LRN`) REFERENCES `student` (`LRN`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `levelIDfk` FOREIGN KEY (`levelID`) REFERENCES `level` (`levelID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `syidfk` FOREIGN KEY (`syid`) REFERENCES `sy` (`syid`) ON UPDATE CASCADE;
+
+--
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `lfk` FOREIGN KEY (`levelID`) REFERENCES `level` (`levelID`);
+  ADD CONSTRAINT `lfk` FOREIGN KEY (`levelID`) REFERENCES `level` (`levelID`),
+  ADD CONSTRAINT `syfk` FOREIGN KEY (`syid`) REFERENCES `sy` (`syid`);
 
 --
 -- Constraints for table `subject`
