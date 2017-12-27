@@ -215,6 +215,77 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
 
 
 
+ <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn dropdown-toggle">School Year <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="registrar1.php?sy=16-17">SY 2016-2017</a></li>
+                                            <li><a href="registrar1.php?sy=17-18">SY 2017-2018</a></li>
+                                            <li><a href="registrar1.php?sy=18-19">SY 2018-2019</a></li>
+                                            <li><a href="registrar1.php?sy=19-20">SY 2019-2020</a></li>
+                                        </ul>
+</div>
+
+
+
+<?php $sy=isset($_REQUEST['sy'])?$_REQUEST['sy']:NULL;
+if($sy == "17-18"){
+?>
+<div>
+    <h1>ang car kay volvo</h1>
+</div>
+
+<?php
+}
+?>
+<?php
+if($sy == "18-19"){
+?>
+<div>
+    <h1>ang car kay saab</h1>
+</div>
+
+<?php
+}
+?>
+
+
+
+
+
+<!-- 
+
+<h1>FILTER BY COLOR</h1>
+<div class="container"> 
+  <input type="radio" id="blue" name="color" />
+  <input type="radio" id="red" name="color"/>
+  <input type="radio" id="green" name="color"/>
+  <input type="radio" id="reset" name="color"/>
+  <div class="dropdown">
+  <label class="default">Select your option</label>
+  <label for="green">GREEN</label>
+  <label for="red">RED</label>
+  <label for="blue">BLUE</label>
+  <label for="reset">RESET</label>
+    </div>
+
+  <div class="tile blue">1</div>
+  <div class="tile red">2</div>
+  <div class="tile blue">3</div>
+  <div class="tile green">4</div>
+  <div class="tile blue">5</div>
+  <div class="tile red">6</div>
+  <div class="tile red">7</div>
+  <div class="tile green">8</div>
+  <div class="tile blue">9</div>
+  <div class="tile green">10</div>
+  <div class="tile red">11</div>
+  <div class="tile green">12</div>
+  <div class="tile blue">13</div>
+  <div class="tile blue">14</div>
+  <div class="tile green">15</div>
+  <div class="tile red">16</div>
+</div>
+ -->
 
 
 
@@ -302,3 +373,94 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
       }
   }
         </script>
+
+        <style type="text/css">
+            body{
+  margin:0;
+  text-align:center;
+  font-family: Verdana;
+  background:#f5f5f5;
+}
+h1 {
+  text-align:center;
+}
+.container {
+  width:90%;
+  margin:0 auto;
+}
+input[type="radio"] {
+    display:none;
+}
+#blue:checked + label {
+  background:#6666ff;
+}
+#blue:checked ~ .tile:not(.blue) {
+  width:0;
+  height:0;
+  padding:0;
+  margin:0;
+  opacity:0;
+}
+#red:checked + label {
+  background:#ff4466;
+}
+#red:checked ~ .tile:not(.red) {
+  width:0;
+  height:0;
+  padding:0;
+  margin:0;
+  opacity:0;
+}
+#green:checked + label {
+  background:#66dd99;
+}
+#green:checked ~ .tile:not(.green) {
+  width:0;
+  height:0;
+  padding:0;
+  margin:0;
+  opacity:0;
+}
+
+.tile {
+  width:23%;
+  height:100px;
+  float:left;
+  transition:all 1s;
+  margin:0.5%;
+  padding:0.5%;
+}
+.green {
+  background:#66dd99;
+}
+.blue {
+  background:#6666ff;
+}
+.red {
+  background:#ff4466;
+}
+
+.dropdown {
+  background-color: #FFF;
+}
+
+.dropdown label {
+    display: block;
+    text-align: left;
+}
+
+.dropdown label:not(.default) {
+    display: none;
+}
+
+.dropdown:hover .default,
+.dropdown:focus .default {
+    color: lightgray;
+}
+
+.dropdown:hover label:not(.default),
+.dropdown:focus label:not(.default)
+ {
+    display: block;
+}
+        </style>

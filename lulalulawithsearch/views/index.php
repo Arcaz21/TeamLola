@@ -32,7 +32,7 @@
     $_SESSION['username'] =  $data->username;
     $_SESSION['password'] =  $data->password;
     $_SESSION['role'] =  $data->role;
-    header("location:../views/admin1.php");
+    header("location:../views/admin1.php?sy=17-18");
                 endif; 
              if ($data->role == "cashier"): 
                
@@ -48,7 +48,7 @@
     $_SESSION['username'] =  $data->username;
     $_SESSION['password'] =  $data->password;
     $_SESSION['role'] =  $data->role;
-     header("location:../views/registrar1.php");           
+     header("location:../views/registrar1.php?sy=17-18");           
                
              endif; 
              if ($data->role == "guardian"): 

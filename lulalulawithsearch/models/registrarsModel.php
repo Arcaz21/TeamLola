@@ -145,7 +145,7 @@ class studentModel extends DBconnection {
                 }
 
             	function listStudentsk1(){
-                    $query = "SELECT * from student WHERE levelID = 11 AND syid = '17-18' ";
+                    $query = "SELECT * from student WHERE levelID = 11 ";
                     $result = mysqli_query($this->conn, $query);
                     $res = array();
 
@@ -155,7 +155,7 @@ class studentModel extends DBconnection {
                     return ($result->num_rows>0)? $res: FALSE;
                 }
                 function listStudentsk2(){
-                    $query = "SELECT * from student WHERE levelID = 22 AND syid = '17-18' ";
+                    $query = "SELECT * from student WHERE levelID = 22  ";
                     $result = mysqli_query($this->conn, $query);
                     $res = array();
 
@@ -165,7 +165,7 @@ class studentModel extends DBconnection {
                     return ($result->num_rows>0)? $res: FALSE;
                 }
                 function listStudentsg1(){
-                    $query = "SELECT * from student WHERE levelID = 1 AND syid = '17-18' ";
+                    $query = "SELECT * from student WHERE levelID = 1  ";
                     $result = mysqli_query($this->conn, $query);
                     $res = array();
 
@@ -175,7 +175,7 @@ class studentModel extends DBconnection {
                     return ($result->num_rows>0)? $res: FALSE;
                 }
                 function listStudentsg2(){
-                    $query = "SELECT * from student WHERE levelID = 2 AND syid = '17-18' ";
+                    $query = "SELECT * from student WHERE levelID = 2 ";
                     $result = mysqli_query($this->conn, $query);
                     $res = array();
 
@@ -185,7 +185,7 @@ class studentModel extends DBconnection {
                     return ($result->num_rows>0)? $res: FALSE;
                 }
                 function listStudentsg3(){
-                    $query = "SELECT * from student WHERE levelID = 3 AND syid = '17-18' ";
+                    $query = "SELECT * from student WHERE levelID = 3  ";
                     $result = mysqli_query($this->conn, $query);
                     $res = array();
 
